@@ -1,0 +1,25 @@
+<section class="deals-page">
+  @if (listVm$ | async; as vm) {
+    <mat-card class="deals-page__card" appearance="outlined">
+      <mat-card-header class="deals-page__card-header">
+        <mat-card-title>Deals</mat-card-title>
+        <mat-card-subtitle>Search and compare opportunities</mat-card-subtitle>
+      </mat-card-header>
+      <mat-card-content class="deals-page__card-content">
+        <app-deal-list-filters
+          [form]="filterForm"
+          [hasActiveFilters]="hasActiveFilters()"
+          (resetFilters)="resetFilters()"
+        />
+
+        <app-deal-list
+          [deals]="vm.rows"
+          [nameSearchQuery]="vm.searchQuery"
+          [emptyTitle]="vm.emptyTitle"
+          [emptyHint]="vm.emptyHint"
+          (editDeal)="onEditDeal($event)"
+        />
+      </mat-card-content>
+    </mat-card>
+  }
+</section>

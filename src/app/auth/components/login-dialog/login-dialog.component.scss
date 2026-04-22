@@ -1,0 +1,14 @@
+.login-dialog__content.mat-mdc-dialog-content {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  min-width: min(100%, 20rem);
+  padding-top: 0.75rem;
+  overflow: visible;
+}
+
+.login-dialog__error {
+  margin: 0;
+  color: #b91c1c;
+  font-size: 0.875rem;
+}

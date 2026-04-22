@@ -1,0 +1,18 @@
+<mat-toolbar color="primary" class="header">
+  <a routerLink="/deals" class="header__brand">
+    <span class="header__brand-title">{{ appTitle() }}</span>
+    <span class="header__brand-version">v{{ appVersion }}</span>
+  </a>
+  <span class="header__spacer"></span>
+
+  <button mat-stroked-button type="button" class="header__btn" (click)="addDealClicked.emit()">
+    Add Deal
+  </button>
+
+  @if (isAuthenticated$ | async) {
+    <a mat-button routerLink="/admin" class="header__btn">Admin</a>
+    <button mat-button type="button" class="header__btn" (click)="onLogout()">Logout</button>
+  } @else {
+    <button mat-button type="button" class="header__btn" (click)="loginClicked.emit()">Login</button>
+  }
+</mat-toolbar>

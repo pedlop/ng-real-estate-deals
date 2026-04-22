@@ -1,0 +1,15 @@
+<h2 mat-dialog-title>Sign in</h2>
+
+<mat-dialog-content class="login-dialog__content">
+  <app-login-form
+    [pending]="pending()"
+    (submitted)="onSubmitted($event)"
+  />
+  @if (loginFailed()) {
+    <p class="login-dialog__error" role="alert">Invalid username or password.</p>
+  }
+</mat-dialog-content>
+
+<mat-dialog-actions align="end">
+  <button mat-button type="button" (click)="cancel()">Cancel</button>
+</mat-dialog-actions>

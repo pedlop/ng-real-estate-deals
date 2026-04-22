@@ -1,0 +1,19 @@
+<section class="admin-page">
+  <mat-card class="admin-page__card" appearance="outlined">
+    <mat-card-header class="admin-page__card-header">
+      <mat-card-title>Admin</mat-card-title>
+      <mat-card-subtitle>Manage deals — authentication required to open this area</mat-card-subtitle>
+    </mat-card-header>
+    <mat-card-content class="admin-page__card-content">
+      <app-deal-list
+        [deals]="(deals$ | async) ?? []"
+        [showDelete]="true"
+        [showAdminColumns]="true"
+        emptyTitle="Nothing to manage"
+        emptyHint="No deals in storage yet. Add deals from the toolbar or the public Deals page."
+        (editDeal)="onEditDeal($event)"
+        (deleteDeal)="onDeleteDeal($event)"
+      />
+    </mat-card-content>
+  </mat-card>
+</section>
