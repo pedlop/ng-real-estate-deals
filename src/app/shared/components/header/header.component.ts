@@ -5,6 +5,7 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatToolbarModule } from '@angular/material/toolbar';
 
 import { AuthService } from '@core/auth/services/auth.service';
+import { environment } from '@environments/environment';
 
 @Component({
   selector: 'app-header',
@@ -17,6 +18,7 @@ import { AuthService } from '@core/auth/services/auth.service';
 export class HeaderComponent {
   private readonly auth = inject(AuthService);
   private readonly router = inject(Router);
+  readonly appVersion = environment.version;
 
   /** Toolbar title (e.g. "Deal Manager"). */
   readonly appTitle = input<string>('Deal Manager');

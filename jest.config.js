@@ -18,6 +18,7 @@ module.exports = {
     '^@auth/(.*)$': '<rootDir>/src/app/auth/$1',
     '^@shared/(.*)$': '<rootDir>/src/app/shared/$1',
     '^@models/(.*)$': '<rootDir>/src/app/models/$1',
+    '^@environments/(.*)$': '<rootDir>/src/environments/$1',
   },
   testPathIgnorePatterns: ['<rootDir>/dist/', '<rootDir>/node_modules/'],
 };
