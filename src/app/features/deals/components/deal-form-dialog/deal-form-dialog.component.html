@@ -79,9 +79,11 @@
           matInput
           class="deal-form-dialog__cap-input"
           [value]="cap.display"
+          disabled
           readonly
           tabindex="-1"
           aria-readonly="true"
+          aria-disabled="true"
         />
         <mat-hint class="deal-form-dialog__cap-hints">
           <span class="deal-form-dialog__cap-hint-line">Typical cap rate ranges from 5% to 12%</span>

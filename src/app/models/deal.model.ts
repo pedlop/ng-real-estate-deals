@@ -5,6 +5,10 @@ export interface DealPlain {
   purchasePrice: number;
   address: string;
   noi: number;
+  /** ISO datetime string for the last deal update. */
+  lastUpdatedAt?: string;
+  /** Username/system label for who last changed the deal. */
+  lastUpdatedBy?: string;
 }
 
 /** Domain model with derived metrics. */
@@ -15,6 +19,8 @@ export class Deal implements DealPlain {
     public purchasePrice: number,
     public address: string,
     public noi: number,
+    public lastUpdatedAt: string = new Date().toISOString(),
+    public lastUpdatedBy: string = 'System',
   ) {}
 
   /** Capitalization rate: NOI ÷ purchase price (0 if price is 0). */
@@ -26,6 +32,14 @@ export class Deal implements DealPlain {
   }
 
   static fromPlain(p: DealPlain): Deal {
-    return new Deal(p.id, p.name, p.purchasePrice, p.address, p.noi);
+    return new Deal(
+      p.id,
+      p.name,
+      p.purchasePrice,
+      p.address,
+      p.noi,
+      p.lastUpdatedAt ?? new Date().toISOString(),
+      p.lastUpdatedBy ?? 'Imported',
+    );
   }
 }

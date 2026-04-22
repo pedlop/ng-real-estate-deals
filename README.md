@@ -16,7 +16,26 @@ Run `ng build` to build the project. The build artifacts will be stored in the `
 
 ## Running unit tests
 
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
+Run `npm test` to execute the unit tests with Jest.
+
+## Deploy to GitHub Pages
+
+1. Ensure your GitHub repository is pushed and GitHub Pages is configured for the `gh-pages` branch.
+2. Run:
+
+```bash
+npm run deploy
+```
+
+This uses:
+
+```bash
+ng deploy --base-href=/ng-real-estate-deals/
+```
+
+Live demo URL format:
+
+`https://<your-github-username>.github.io/ng-real-estate-deals/`
 
 ## Running end-to-end tests
 

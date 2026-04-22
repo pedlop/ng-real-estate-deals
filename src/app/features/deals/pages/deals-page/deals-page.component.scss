@@ -18,25 +18,3 @@
   gap: 1rem;
   padding-top: 0.5rem !important;
 }
-
-.deals-page__filters {
-  display: flex;
-  flex-wrap: wrap;
-  align-items: center;
-  gap: 0.75rem 1rem;
-}
-
-.deals-page__reset-filters {
-  flex: 0 0 auto;
-  margin-top: 0.125rem;
-}
-
-.deals-page__field {
-  flex: 1 1 10rem;
-  min-width: 0;
-}
-
-.deals-page__field--search {
-  flex: 2 1 16rem;
-  max-width: 24rem;
-}

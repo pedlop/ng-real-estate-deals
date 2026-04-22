@@ -34,6 +34,11 @@ export class AuthService {
     return this.userSubject.getValue() !== null;
   }
 
+  /** Current username for audit metadata (falls back to null when signed out). */
+  currentUsername(): string | null {
+    return this.userSubject.getValue()?.username ?? null;
+  }
+
   login(username: string, password: string): Observable<boolean> {
     const u = username.trim();
     const p = password.trim();

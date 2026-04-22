@@ -1,20 +1,17 @@
 import { AsyncPipe } from '@angular/common';
 import { ChangeDetectionStrategy, Component, DestroyRef, inject } from '@angular/core';
 import { takeUntilDestroyed, toSignal } from '@angular/core/rxjs-interop';
-import { FormBuilder, ReactiveFormsModule } from '@angular/forms';
-import { MatButtonModule } from '@angular/material/button';
+import { FormBuilder } from '@angular/forms';
 import { MatCardModule } from '@angular/material/card';
-import { MatFormFieldModule } from '@angular/material/form-field';
-import { MatInputModule } from '@angular/material/input';
-import { NgxMaskDirective } from 'ngx-mask';
 import { combineLatest, distinctUntilChanged, map, shareReplay, startWith } from 'rxjs';
 
+import { DealListFiltersComponent } from '../../components/deal-list-filters/deal-list-filters.component';
 import { DealListComponent } from '../../components/deal-list/deal-list.component';
 import { DealDialogService } from '../../services/deal-dialog.service';
 import { DealService } from '../../services/deal.service';
 import { Deal } from '@models/deal.model';
 import { SnackbarFeedbackService } from '@shared/services/snackbar-feedback.service';
-import { filterDeals } from '@shared/utils/filter-deals';
+import { filterDeals } from '@shared/utils/filter-deals/filter-deals';
 import { parsePriceFilterValue } from '@shared/utils/parse-price-filter-value';
 
 export interface DealsListVm {
@@ -30,12 +27,8 @@ export interface DealsListVm {
   standalone: true,
   imports: [
     AsyncPipe,
-    ReactiveFormsModule,
-    MatButtonModule,
     MatCardModule,
-    MatFormFieldModule,
-    MatInputModule,
-    NgxMaskDirective,
+    DealListFiltersComponent,
     DealListComponent,
   ],
   templateUrl: './deals-page.component.html',
@@ -43,11 +36,11 @@ export interface DealsListVm {
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class DealsPageComponent {
-  private readonly fb = inject(FormBuilder);
-  private readonly dealService = inject(DealService);
-  private readonly dealDialog = inject(DealDialogService);
-  private readonly snackbar = inject(SnackbarFeedbackService);
-  private readonly destroyRef = inject(DestroyRef);
+  private readonly fb = inject<FormBuilder>(FormBuilder);
+  private readonly dealService = inject<DealService>(DealService);
+  private readonly dealDialog = inject<DealDialogService>(DealDialogService);
+  private readonly snackbar = inject<SnackbarFeedbackService>(SnackbarFeedbackService);
+  private readonly destroyRef = inject<DestroyRef>(DestroyRef);
 
   /** Filter UI state (works with `NgxMaskDirective` on price fields). */
   readonly filterForm = this.fb.group({

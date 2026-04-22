@@ -1,4 +1,4 @@
-import { CurrencyPipe, NgClass } from '@angular/common';
+import { CurrencyPipe, DatePipe, NgClass } from '@angular/common';
 import { ChangeDetectionStrategy, Component, computed, input, output, signal } from '@angular/core';
 import { MatButtonModule } from '@angular/material/button';
 import { MatCardModule } from '@angular/material/card';
@@ -8,8 +8,8 @@ import { MatTableModule } from '@angular/material/table';
 
 import { Deal } from '@models/deal.model';
 import { DEAL_CURRENCY_DIGITS_INFO, DEAL_CURRENCY_FORMAT } from '@shared/constants/currency.format';
-import { CapRatePercentPipe } from '@shared/pipes/cap-rate-percent.pipe';
-import { HighlightPipe } from '@shared/pipes/highlight.pipe';
+import { CapRatePercentPipe } from '@shared/pipes/cap-rate-percent/cap-rate-percent.pipe';
+import { HighlightPipe } from '@shared/pipes/highlight/highlight.pipe';
 
 function compareDeals(a: Deal, b: Deal, column: string, direction: 'asc' | 'desc'): number {
   const mult = direction === 'asc' ? 1 : -1;
@@ -22,6 +22,10 @@ function compareDeals(a: Deal, b: Deal, column: string, direction: 'asc' | 'desc
       return mult * (a.noi - b.noi);
     case 'capRate':
       return mult * (a.capRate - b.capRate);
+    case 'lastUpdatedAt':
+      return mult * (Date.parse(a.lastUpdatedAt) - Date.parse(b.lastUpdatedAt));
+    case 'lastUpdatedBy':
+      return mult * a.lastUpdatedBy.localeCompare(b.lastUpdatedBy, undefined, { sensitivity: 'base' });
     default:
       return 0;
   }
@@ -33,6 +37,7 @@ function compareDeals(a: Deal, b: Deal, column: string, direction: 'asc' | 'desc
   standalone: true,
   imports: [
     CurrencyPipe,
+    DatePipe,
     NgClass,
     CapRatePercentPipe,
     HighlightPipe,
@@ -54,6 +59,8 @@ export class DealListComponent {
 
   /** Substring highlight in the Name column (e.g. deals page search). */
   readonly nameSearchQuery = input('');
+  /** When true (admin view), show audit metadata columns. */
+  readonly showAdminColumns = input(false);
 
   /** Shown when `deals` is empty (title + optional hint). */
   readonly emptyTitle = input('No deals found');
@@ -62,7 +69,13 @@ export class DealListComponent {
   readonly editDeal = output<Deal>();
   readonly deleteDeal = output<Deal>();
 
-  readonly displayedColumns: readonly string[] = ['name', 'purchasePrice', 'noi', 'capRate', 'actions'];
+  readonly displayedColumns = computed<readonly string[]>(() => {
+    const base = ['name', 'purchasePrice', 'noi', 'capRate'] as const;
+    const admin = this.showAdminColumns()
+      ? (['lastUpdatedAt', 'lastUpdatedBy'] as const)
+      : ([] as const);
+    return [...base, ...admin, 'actions'];
+  });
 
   private readonly sortState = signal<Sort>({ active: '', direction: '' });
 

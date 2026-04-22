@@ -1,0 +1,57 @@
+<form
+  [formGroup]="form()"
+  class="deal-list-filters"
+  role="search"
+  aria-label="Filter deals"
+  (ngSubmit)="$event.preventDefault()"
+>
+  <mat-form-field
+    class="deal-list-filters__field deal-list-filters__field--search"
+    appearance="outline"
+    subscriptSizing="dynamic"
+  >
+    <mat-label>Search by name</mat-label>
+    <input matInput type="search" formControlName="search" autocomplete="off" />
+  </mat-form-field>
+
+  <mat-form-field class="deal-list-filters__field" appearance="outline" subscriptSizing="dynamic">
+    <mat-label>Min price (USD)</mat-label>
+    <input
+      matInput
+      type="text"
+      inputmode="numeric"
+      formControlName="minPrice"
+      placeholder="Any"
+      mask="separator.0"
+      thousandSeparator=","
+      [allowNegativeNumbers]="false"
+      [keepCharacterPositions]="true"
+    />
+  </mat-form-field>
+
+  <mat-form-field class="deal-list-filters__field" appearance="outline" subscriptSizing="dynamic">
+    <mat-label>Max price (USD)</mat-label>
+    <input
+      matInput
+      type="text"
+      inputmode="numeric"
+      formControlName="maxPrice"
+      placeholder="Any"
+      mask="separator.0"
+      thousandSeparator=","
+      [allowNegativeNumbers]="false"
+      [keepCharacterPositions]="true"
+    />
+  </mat-form-field>
+
+  <button
+    mat-stroked-button
+    type="button"
+    class="deal-list-filters__reset"
+    [disabled]="!hasActiveFilters()"
+    (click)="resetFilters.emit()"
+  >
+    Reset Filters
+  </button>
+</form>
+

@@ -22,7 +22,7 @@ export class DealDialogService {
   private readonly authDialog = inject(AuthDialogService);
 
   /**
-   * If already authenticated → opens the create-deal modal immediately.
+   * If already authenticated -> opens the create-deal modal immediately.
    * Otherwise opens the login modal first; on success, opens the create-deal modal.
    */
   openCreateWhenReady(): Observable<DealFormResult | undefined> {

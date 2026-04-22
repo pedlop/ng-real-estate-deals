@@ -85,6 +85,36 @@
           </td>
         </ng-container>
 
+        @if (showAdminColumns()) {
+          <ng-container matColumnDef="lastUpdatedAt">
+            <th
+              mat-header-cell
+              *matHeaderCellDef
+              mat-sort-header="lastUpdatedAt"
+              class="deal-list__th deal-list__th--num deal-list__th--sort-end"
+            >
+              Last updated
+            </th>
+            <td mat-cell *matCellDef="let deal" class="deal-list__td deal-list__td--num deal-list__meta">
+              {{ deal.lastUpdatedAt | date : 'MMM d, y, h:mm a' }}
+            </td>
+          </ng-container>
+
+          <ng-container matColumnDef="lastUpdatedBy">
+            <th
+              mat-header-cell
+              *matHeaderCellDef
+              mat-sort-header="lastUpdatedBy"
+              class="deal-list__th deal-list__th--name"
+            >
+              Last updated by
+            </th>
+            <td mat-cell *matCellDef="let deal" class="deal-list__td deal-list__meta">
+              {{ deal.lastUpdatedBy }}
+            </td>
+          </ng-container>
+        }
+
         <ng-container matColumnDef="actions">
           <th mat-header-cell *matHeaderCellDef class="deal-list__th deal-list__actions-header">Actions</th>
           <td mat-cell *matCellDef="let deal" class="deal-list__td deal-list__actions-cell">
@@ -103,8 +133,8 @@
           </td>
         </ng-container>
 
-        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-        <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
+        <tr mat-header-row *matHeaderRowDef="displayedColumns()"></tr>
+        <tr mat-row *matRowDef="let row; columns: displayedColumns()"></tr>
       </table>
     </div>
   }

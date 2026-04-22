@@ -8,6 +8,7 @@
       <app-deal-list
         [deals]="(deals$ | async) ?? []"
         [showDelete]="true"
+        [showAdminColumns]="true"
         emptyTitle="Nothing to manage"
         emptyHint="No deals in storage yet. Add deals from the toolbar or the public Deals page."
         (editDeal)="onEditDeal($event)"
