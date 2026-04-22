@@ -22,7 +22,7 @@ describe('HighlightPipe', () => {
 
   it('wraps case-insensitive matches in <mark>', () => {
     const out = pipe.transform('Very nice deal', 'NICE');
-    expect(toHtml(out)).toBe('Very <mark class=\"highlight-mark\">nice</mark> deal');
+    expect(toHtml(out)).toBe('Very <mark class="highlight-mark">nice</mark> deal');
   });
 
   it('returns escaped plain text when search is empty', () => {
@@ -33,14 +33,14 @@ describe('HighlightPipe', () => {
   it('escapes regex characters in search term (literal match)', () => {
     const out = pipe.transform('Price is 1.2x in v1.2', '1.2');
     expect(toHtml(out)).toBe(
-      'Price is <mark class=\"highlight-mark\">1.2</mark>x in v<mark class=\"highlight-mark\">1.2</mark>',
+      'Price is <mark class="highlight-mark">1.2</mark>x in v<mark class="highlight-mark">1.2</mark>',
     );
   });
 
   it('escapes HTML in matched segments to prevent injection', () => {
     const out = pipe.transform('<script>alert(1)</script>', 'script');
     expect(toHtml(out)).toBe(
-      '&lt;<mark class=\"highlight-mark\">script</mark>&gt;alert(1)&lt;/<mark class=\"highlight-mark\">script</mark>&gt;',
+      '&lt;<mark class="highlight-mark">script</mark>&gt;alert(1)&lt;/<mark class="highlight-mark">script</mark>&gt;',
     );
   });
 });

@@ -72,7 +72,7 @@
       }
     </mat-form-field>
 
-    <ng-container *ngIf="capRateVm$ | async as cap">
+    @if (capRateVm$ | async; as cap) {
       <mat-form-field appearance="outline" class="deal-form-dialog__field deal-form-dialog__field--cap">
         <mat-label>Cap rate</mat-label>
         <input
@@ -99,7 +99,7 @@
           }
         </mat-hint>
       </mat-form-field>
-    </ng-container>
+    }
   </mat-dialog-content>
 
   <mat-dialog-actions align="end">

@@ -20,7 +20,7 @@ export class Deal implements DealPlain {
     public address: string,
     public noi: number,
     public lastUpdatedAt: string = new Date().toISOString(),
-    public lastUpdatedBy: string = 'System',
+    public lastUpdatedBy = 'System',
   ) {}
 
   /** Capitalization rate: NOI ÷ purchase price (0 if price is 0). */

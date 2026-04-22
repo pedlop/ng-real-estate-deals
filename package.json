@@ -7,7 +7,8 @@
     "build": "ng build",
     "watch": "ng build --watch --configuration development",
     "test": "jest --runInBand",
-    "deploy": "ng deploy --base-href=/ng-real-estate-deals/"
+    "deploy": "ng deploy --base-href=/ng-real-estate-deals/",
+    "lint": "ng lint"
   },
   "private": true,
   "dependencies": {
@@ -32,9 +33,12 @@
     "@angular/compiler-cli": "^17.3.0",
     "@types/jest": "^29.5.14",
     "angular-cli-ghpages": "^2.0.3",
+    "angular-eslint": "21.0.1",
+    "eslint": "^9.39.1",
     "jest": "^29.7.0",
     "jest-environment-jsdom": "^29.7.0",
     "jest-preset-angular": "^14.3.3",
-    "typescript": "~5.4.2"
+    "typescript": "~5.4.2",
+    "typescript-eslint": "8.46.4"
   }
 }
