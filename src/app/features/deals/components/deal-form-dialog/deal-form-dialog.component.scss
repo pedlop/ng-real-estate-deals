@@ -1,0 +1,36 @@
+.deal-form-dialog__content {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  min-width: min(100%, 22rem);
+  padding-top: 0.5rem;
+}
+
+.deal-form-dialog__field {
+  width: 100%;
+}
+
+.deal-form-dialog__field--cap .deal-form-dialog__cap-input {
+  cursor: default;
+  color: inherit;
+  font-weight: 500;
+}
+
+.deal-form-dialog__cap-hints {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+}
+
+.deal-form-dialog__cap-hint-line {
+  display: block;
+  line-height: 1.35;
+}
+
+.deal-form-dialog__cap-hint-line--warn {
+  color: rgba(0, 0, 0, 0.62);
+  font-weight: 500;
+  border-left: 3px solid #f9a825;
+  padding-left: 0.5rem;
+  margin-top: 0.125rem;
+}

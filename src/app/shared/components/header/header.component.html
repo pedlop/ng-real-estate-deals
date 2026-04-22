@@ -1,0 +1,16 @@
+<mat-toolbar color="primary" class="header">
+  <a routerLink="/deals" class="header__brand">{{ appTitle() }}</a>
+  <span class="header__spacer"></span>
+
+  <button mat-stroked-button type="button" class="header__btn" (click)="addDealClicked.emit()">
+    Add Deal
+  </button>
+
+  <ng-container *ngIf="isAuthenticated$ | async; else loggedOut">
+    <a mat-button routerLink="/admin" class="header__btn">Admin</a>
+    <button mat-button type="button" class="header__btn" (click)="onLogout()">Logout</button>
+  </ng-container>
+  <ng-template #loggedOut>
+    <button mat-button type="button" class="header__btn" (click)="loginClicked.emit()">Login</button>
+  </ng-template>
+</mat-toolbar>

@@ -1,0 +1,111 @@
+<div class="deal-list">
+  @if (deals().length === 0) {
+    <mat-card class="deal-list__empty" appearance="outlined">
+      <mat-card-content class="deal-list__empty-content">
+        <mat-icon class="deal-list__empty-icon" aria-hidden="true">table_chart</mat-icon>
+        <h3 class="deal-list__empty-title mat-body-strong">{{ emptyTitle() }}</h3>
+        @if (emptyHint()) {
+          <p class="deal-list__empty-hint mat-body-medium">{{ emptyHint() }}</p>
+        }
+      </mat-card-content>
+    </mat-card>
+  } @else {
+    <div class="deal-list__table-wrap mat-elevation-z1">
+      <table
+        mat-table
+        matSort
+        [dataSource]="sortedDeals()"
+        (matSortChange)="onSortChange($event)"
+        class="deal-list__table"
+      >
+        <ng-container matColumnDef="name">
+          <th
+            mat-header-cell
+            *matHeaderCellDef
+            mat-sort-header="name"
+            class="deal-list__th deal-list__th--name"
+          >
+            Name
+          </th>
+          <td
+            mat-cell
+            *matCellDef="let deal"
+            class="deal-list__td deal-list__name-cell"
+            [innerHTML]="deal.name | highlight : nameSearchQuery()"
+          ></td>
+        </ng-container>
+
+        <ng-container matColumnDef="purchasePrice">
+          <th
+            mat-header-cell
+            *matHeaderCellDef
+            mat-sort-header="purchasePrice"
+            class="deal-list__th deal-list__th--num deal-list__th--sort-end"
+          >
+            Purchase price
+          </th>
+          <td mat-cell *matCellDef="let deal" class="deal-list__td deal-list__td--num deal-list__price">
+            {{ deal.purchasePrice | currency : currencyCode : 'symbol-narrow' : currencyDigits }}
+          </td>
+        </ng-container>
+
+        <ng-container matColumnDef="noi">
+          <th
+            mat-header-cell
+            *matHeaderCellDef
+            mat-sort-header="noi"
+            class="deal-list__th deal-list__th--num deal-list__th--sort-end"
+          >
+            NOI
+          </th>
+          <td mat-cell *matCellDef="let deal" class="deal-list__td deal-list__td--num">
+            {{ deal.noi | currency : currencyCode : 'symbol-narrow' : currencyDigits }}
+          </td>
+        </ng-container>
+
+        <ng-container matColumnDef="capRate">
+          <th
+            mat-header-cell
+            *matHeaderCellDef
+            mat-sort-header="capRate"
+            class="deal-list__th deal-list__th--num deal-list__th--sort-end"
+          >
+            Cap rate
+          </th>
+          <td
+            mat-cell
+            *matCellDef="let deal"
+            class="deal-list__td deal-list__td--num deal-list__cap"
+            [ngClass]="{
+              'deal-list__cap--typical': capRateBand(deal) === 'typical',
+              'deal-list__cap--warn': capRateBand(deal) === 'warn',
+            }"
+          >
+            {{ deal.capRate | capRatePercent }}
+          </td>
+        </ng-container>
+
+        <ng-container matColumnDef="actions">
+          <th mat-header-cell *matHeaderCellDef class="deal-list__th deal-list__actions-header">Actions</th>
+          <td mat-cell *matCellDef="let deal" class="deal-list__td deal-list__actions-cell">
+            <button mat-button type="button" (click)="editDeal.emit(deal)">Edit</button>
+            @if (showDelete()) {
+              <button
+                mat-button
+                type="button"
+                color="warn"
+                class="deal-list__delete-btn"
+                (click)="deleteDeal.emit(deal)"
+              >
+                Delete
+              </button>
+            }
+          </td>
+        </ng-container>
+
+        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+        <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
+      </table>
+    </div>
+  }
+</div>

@@ -1,0 +1,33 @@
+<form class="login-form" [formGroup]="form" (ngSubmit)="onSubmit()">
+  <fieldset class="login-form__fieldset" [disabled]="pending()">
+    <mat-form-field class="login-form__field" appearance="outline">
+      <mat-label>Username</mat-label>
+      <input matInput formControlName="username" type="text" autocomplete="username" />
+      @if (form.controls.username.invalid && form.controls.username.touched) {
+        @if (form.controls.username.hasError('required')) {
+          <mat-error>Username is required</mat-error>
+        } @else if (form.controls.username.hasError('maxlength')) {
+          <mat-error>Max {{ form.controls.username.getError('maxlength')?.requiredLength }} characters</mat-error>
+        }
+      }
+    </mat-form-field>
+
+    <mat-form-field class="login-form__field" appearance="outline">
+      <mat-label>Password</mat-label>
+      <input matInput formControlName="password" type="password" autocomplete="current-password" />
+      @if (form.controls.password.invalid && form.controls.password.touched) {
+        @if (form.controls.password.hasError('required')) {
+          <mat-error>Password is required</mat-error>
+        } @else if (form.controls.password.hasError('maxlength')) {
+          <mat-error>Max {{ form.controls.password.getError('maxlength')?.requiredLength }} characters</mat-error>
+        }
+      }
+    </mat-form-field>
+
+    <div class="login-form__actions">
+      <button mat-raised-button color="primary" type="submit">
+        {{ submitLabel() }}
+      </button>
+    </div>
+  </fieldset>
+</form>

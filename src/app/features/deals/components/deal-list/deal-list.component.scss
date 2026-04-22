@@ -1,0 +1,124 @@
+.deal-list {
+  display: block;
+  width: 100%;
+}
+
+.deal-list__empty {
+  border-radius: var(--app-radius, 12px);
+  background: #fff;
+}
+
+.deal-list__empty-content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  gap: 0.5rem;
+  padding: 2rem 1.5rem;
+  color: rgba(0, 0, 0, 0.65);
+}
+
+.deal-list__empty-icon {
+  font-size: 2.5rem;
+  width: 2.5rem;
+  height: 2.5rem;
+  color: rgba(0, 0, 0, 0.38);
+}
+
+.deal-list__empty-title {
+  margin: 0;
+  font-size: 1.125rem;
+  font-weight: 500;
+  color: rgba(0, 0, 0, 0.87);
+}
+
+.deal-list__empty-hint {
+  margin: 0;
+  max-width: 28rem;
+  line-height: 1.5;
+}
+
+.deal-list__table-wrap {
+  width: 100%;
+  overflow: auto;
+  border-radius: var(--app-radius, 12px);
+  background: #fff;
+}
+
+.deal-list__table {
+  width: 100%;
+  border-collapse: separate;
+  border-spacing: 0;
+}
+
+.deal-list__th {
+  font-size: 0.75rem;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: rgba(0, 0, 0, 0.55);
+  padding: 0.75rem 1rem 0.5rem;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.08);
+}
+
+.deal-list__th--name {
+  text-align: left;
+}
+
+.deal-list__th--num {
+  text-align: right;
+  white-space: nowrap;
+}
+
+:host ::ng-deep .deal-list__th--sort-end .mat-sort-header-container {
+  justify-content: flex-end;
+}
+
+.deal-list__td {
+  padding: 0.875rem 1rem;
+  vertical-align: middle;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.06);
+  font-size: 0.9375rem;
+}
+
+.deal-list__td--num {
+  text-align: right;
+  font-variant-numeric: tabular-nums;
+}
+
+.deal-list__price {
+  font-weight: 600;
+  color: rgba(0, 0, 0, 0.9);
+}
+
+.deal-list__cap {
+  font-weight: 600;
+  font-variant-numeric: tabular-nums;
+}
+
+.deal-list__cap--typical {
+  color: #2e7d32;
+}
+
+.deal-list__cap--warn {
+  color: #ef6c00;
+}
+
+.deal-list__actions-header,
+.deal-list__actions-cell {
+  min-width: 7rem;
+  text-align: end;
+  white-space: nowrap;
+}
+
+.deal-list__delete-btn {
+  margin-left: 0.25rem;
+}
+
+/* innerHTML highlight; `mark` is not in component template */
+.deal-list__name-cell ::ng-deep mark.highlight-mark {
+  background-color: rgba(255, 236, 179, 0.95);
+  color: inherit;
+  padding: 0 0.05em;
+  border-radius: 2px;
+}

@@ -1,0 +1,107 @@
+<h2 mat-dialog-title>{{ title }}</h2>
+
+<form [formGroup]="form" (ngSubmit)="submit()">
+  <mat-dialog-content class="deal-form-dialog__content">
+    <mat-form-field appearance="outline" class="deal-form-dialog__field">
+      <mat-label>Name</mat-label>
+      <input matInput formControlName="name" type="text" autocomplete="off" />
+      @if (form.controls.name.invalid && form.controls.name.touched) {
+        @if (form.controls.name.hasError('required')) {
+          <mat-error>Name is required</mat-error>
+        } @else if (form.controls.name.hasError('maxlength')) {
+          <mat-error>Max {{ form.controls.name.getError('maxlength')?.requiredLength }} characters</mat-error>
+        }
+      }
+    </mat-form-field>
+
+    <mat-form-field appearance="outline" class="deal-form-dialog__field">
+      <mat-label>Purchase price</mat-label>
+      <input
+        matInput
+        type="text"
+        inputmode="numeric"
+        formControlName="purchasePrice"
+        mask="separator.0"
+        thousandSeparator=","
+        [allowNegativeNumbers]="false"
+        [keepCharacterPositions]="true"
+      />
+      @if (form.controls.purchasePrice.invalid && form.controls.purchasePrice.touched) {
+        @if (form.controls.purchasePrice.hasError('required')) {
+          <mat-error>Purchase price is required</mat-error>
+        } @else if (form.controls.purchasePrice.hasError('min')) {
+          <mat-error>Must be 0 or greater</mat-error>
+        } @else if (form.controls.purchasePrice.hasError('max')) {
+          <mat-error>Amount is too large</mat-error>
+        }
+      }
+    </mat-form-field>
+
+    <mat-form-field appearance="outline" class="deal-form-dialog__field">
+      <mat-label>Address</mat-label>
+      <textarea matInput formControlName="address" rows="2"></textarea>
+      @if (form.controls.address.invalid && form.controls.address.touched) {
+        @if (form.controls.address.hasError('required')) {
+          <mat-error>Address is required</mat-error>
+        } @else if (form.controls.address.hasError('maxlength')) {
+          <mat-error>Max {{ form.controls.address.getError('maxlength')?.requiredLength }} characters</mat-error>
+        }
+      }
+    </mat-form-field>
+
+    <mat-form-field appearance="outline" class="deal-form-dialog__field">
+      <mat-label>NOI</mat-label>
+      <input
+        matInput
+        type="text"
+        inputmode="numeric"
+        formControlName="noi"
+        mask="separator.0"
+        thousandSeparator=","
+        [allowNegativeNumbers]="false"
+        [keepCharacterPositions]="true"
+      />
+      @if (form.controls.noi.invalid && form.controls.noi.touched) {
+        @if (form.controls.noi.hasError('required')) {
+          <mat-error>NOI is required</mat-error>
+        } @else if (form.controls.noi.hasError('min')) {
+          <mat-error>Must be 0 or greater</mat-error>
+        } @else if (form.controls.noi.hasError('max')) {
+          <mat-error>Amount is too large</mat-error>
+        }
+      }
+    </mat-form-field>
+
+    <ng-container *ngIf="capRateVm$ | async as cap">
+      <mat-form-field appearance="outline" class="deal-form-dialog__field deal-form-dialog__field--cap">
+        <mat-label>Cap rate</mat-label>
+        <input
+          matInput
+          class="deal-form-dialog__cap-input"
+          [value]="cap.display"
+          readonly
+          tabindex="-1"
+          aria-readonly="true"
+        />
+        <mat-hint class="deal-form-dialog__cap-hints">
+          <span class="deal-form-dialog__cap-hint-line">Typical cap rate ranges from 5% to 12%</span>
+          @if (cap.warning === 'low') {
+            <span class="deal-form-dialog__cap-hint-line deal-form-dialog__cap-hint-line--warn">
+              Below typical range — may indicate lower return
+            </span>
+          }
+          @if (cap.warning === 'high') {
+            <span class="deal-form-dialog__cap-hint-line deal-form-dialog__cap-hint-line--warn">
+              Above typical range — verify assumptions
+            </span>
+          }
+        </mat-hint>
+      </mat-form-field>
+    </ng-container>
+  </mat-dialog-content>
+
+  <mat-dialog-actions align="end">
+    <button type="button" mat-button mat-dialog-close>Cancel</button>
+    <button type="submit" mat-flat-button color="primary" [disabled]="form.invalid">Save</button>
+  </mat-dialog-actions>
+</form>

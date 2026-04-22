@@ -1,0 +1,28 @@
+:host {
+  display: block;
+  width: 100%;
+}
+
+.login-form__fieldset {
+  border: none;
+  margin: 0;
+  padding: 0;
+  min-width: 0;
+}
+
+.login-form {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  width: 100%;
+  /* Room for outline notch + floating label above the first field */
+  padding-top: 0.125rem;
+}
+
+.login-form__field {
+  width: 100%;
+}
+
+.login-form__actions {
+  margin-top: 0.5rem;
+}

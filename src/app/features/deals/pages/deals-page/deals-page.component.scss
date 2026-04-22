@@ -1,0 +1,42 @@
+.deals-page {
+  max-width: var(--app-page-max-width, 72rem);
+  margin: 0 auto;
+  padding: var(--app-page-padding, 1.25rem);
+}
+
+.deals-page__card {
+  border-radius: var(--app-radius, 12px);
+}
+
+.deals-page__card-header .mat-mdc-card-header-text {
+  gap: 0.25rem;
+}
+
+.deals-page__card-content {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  padding-top: 0.5rem !important;
+}
+
+.deals-page__filters {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.75rem 1rem;
+}
+
+.deals-page__reset-filters {
+  flex: 0 0 auto;
+  margin-top: 0.125rem;
+}
+
+.deals-page__field {
+  flex: 1 1 10rem;
+  min-width: 0;
+}
+
+.deals-page__field--search {
+  flex: 2 1 16rem;
+  max-width: 24rem;
+}
